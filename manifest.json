@@ -1,0 +1,28 @@
+{
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "Firefox Multi-Account Tabs",
+    "default_popup": "context.html",
+    "default_icon": "img/multiaccountcontainer-16.svg",
+    "default_area": "tabstrip",
+    "theme_icons": [
+      {
+        "light": "img/multiaccountcontainer-16.svg",
+        "dark": "img/multiaccountcontainer-16.svg",
+        "size": 32
+      }
+    ]
+  },
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/contextual-identities",
+  "manifest_version": 2,
+  "name": "Contextual Identities",
+  "version": "1.0",
+  "permissions": [
+      "contextualIdentities",
+      "cookies",
+      "tabHide"
+  ],
+  "icons": {
+    "128": "identity.svg"
+  }
+}
