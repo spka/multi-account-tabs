@@ -20,7 +20,8 @@
   "permissions": [
       "contextualIdentities",
       "cookies",
-      "tabHide"
+      "tabHide",
+      "storage"
   ],
   "icons": {
     "128": "identity.svg"

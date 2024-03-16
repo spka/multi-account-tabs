@@ -204,3 +204,7 @@ body {
   letter-spacing: -0.125px;
   min-inline-size: 352px;
 }
+
+a {
+  color: var(--link-color);
+}

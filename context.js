@@ -68,3 +68,34 @@ if (browser.contextualIdentities === undefined) {
       }
     });
 }
+
+// set theme
+// function getTheme(currentTheme, window) {
+//   if (typeof currentTheme !== "undefined" && currentTheme !== "auto") {
+//     return currentTheme;
+//   }
+//   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+//     return "dark";
+//   }
+//   return "light";
+// }
+
+// browser.storage.local.get("currentTheme")
+//   .then((currentTheme) => {
+//     const popup = document.getElementsByTagName("html")[0];
+//     // const theme = getTheme(currentTheme, window);
+//     // console.log(JSON.parse(JSON.stringify(currentTheme)));
+//     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+//       // return "dark";
+//       popup.setAttribute("data-theme", "dark");
+//     }
+//     // return "light";
+//     popup.setAttribute("data-theme", "light");
+//   });
+
+const popup = document.getElementsByTagName("html")[0];
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  popup.setAttribute("data-theme", "dark");
+} else {
+  popup.setAttribute("data-theme", "light");
+}
