@@ -183,7 +183,7 @@ body {
   font-size: 13px;
   /* inline-size: 352px; */
   letter-spacing: -0.125px;
-  min-inline-size: 150px;
+  min-inline-size: 100px;
 }
 
 a {

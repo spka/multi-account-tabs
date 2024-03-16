@@ -38,6 +38,7 @@ function onlyShowIdentity(identity) {
         // }
         browser.tabs.hide(tabs.map((i) => i.id));
         browser.tabs.show(idArray);
+        window.close();
       });
   });
 }
