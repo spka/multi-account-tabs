@@ -1,22 +1,3 @@
-html, body {
-  width: 350px;
-}
-
-a {
-  margin: 10px;
-  display: inline-block;
-}
-
-.panel {
-  margin: 5px;
-}
-
-span.identity {
-  width: 100px;
-  display: inline-block;
-  margin-left: 1em;
-}
-
 [data-theme="light"],
 :root {
   --fontInter: "Inter", sans-serif;
@@ -200,11 +181,41 @@ body {
   color: var(--text-color-primary);
   font-family: var(--fontInter);
   font-size: 13px;
-  inline-size: 352px;
+  /* inline-size: 352px; */
   letter-spacing: -0.125px;
-  min-inline-size: 352px;
+  min-inline-size: 150px;
 }
 
 a {
   color: var(--link-color);
+  margin: 10px;
+  display: inline-block;
 }
+
+/* .panel {
+  padding: 5px 0px;
+} */
+
+span.identity {
+  display: block;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  position: relative;
+  padding-left: 40px;
+}
+
+span.identity .test {
+  width: 30px;
+  height: 50%;
+  display: block;
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  mask-size: contain;
+}
+
+span.identity:hover {
+  background-color: rgba(82, 82, 94, 1);
+}
+

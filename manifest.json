@@ -4,7 +4,7 @@
     "default_title": "Multi-Account Container Tabs",
     "default_popup": "context.html",
     "default_icon": "img/multiaccountcontainer-16.svg",
-    "default_area": "tabstrip",
+    "default_area": "navbar",
     "theme_icons": [
       {
         "light": "img/multiaccountcontainertabs-16.svg",

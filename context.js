@@ -1,41 +1,55 @@
 function eventHandler(event) {
-  if (event.target.dataset.action == 'create') {
+
+  // console.log(event.target.dataset.tabs);
+
+  if(event.target.dataset.tabs == 'false') {
     browser.tabs.create({
-      url: 'about:blank',
-      cookieStoreId: event.target.dataset.identity
+      // url: 'about:blank',
+      cookieStoreId: event.target.dataset.identity,
+      // active: true
     });
+    event.target.dataset.tabs = 'true';
   }
-  if (event.target.dataset.action == 'close-all') {
-    browser.tabs.query({
-      cookieStoreId: event.target.dataset.identity
-    }).then((tabs) => {
-      browser.tabs.remove(tabs.map((i) => i.id));
-    });
-  }
-  if (event.target.dataset.action == 'show') {
-    // console.log(event.target);
-    browser.tabs.query({ 
-      cookieStoreId: event.target.dataset.identity
-    }).then((identities) => {
-        const idArray = identities.map((i) => i.id);
-        browser.tabs.update(idArray[0], { active: true });
-        browser.tabs.query({}).then((tabs) => {
-          // console.log(tabs.map((i) => i.id));
-          browser.tabs.hide(tabs.map((i) => i.id));
-          browser.tabs.show(idArray);
-        });
-    });
-  }
+
+  // if (event.target.dataset.action == 'remove') {
+  //   browser.tabs.query({
+  //     cookieStoreId: event.target.dataset.identity
+  //   }).then((tabs) => {
+  //     browser.tabs.remove(tabs.map((i) => i.id));
+  //   });
+  // }
+
+  onlyShowIdentity(event.target.dataset.identity);
   event.preventDefault();
 }
 
+function onlyShowIdentity(identity) {
+  browser.tabs.query({ 
+    cookieStoreId: identity
+  }).then((identities) => {
+      const idArray = identities.map((i) => i.id);
+      browser.tabs.update(idArray[0], { active: true });
+      browser.tabs.query({}).then((tabs) => {
+        // let newArray = [];
+        // for (let tab of tabs.map((i) => i.id)) {
+        //   if(!idArray.includes(tab)) {
+        //     newArray.push(tab);
+        //   }
+        // }
+        browser.tabs.hide(tabs.map((i) => i.id));
+        browser.tabs.show(idArray);
+      });
+  });
+}
+
 function createOptions(node, identity) {
-  for (let option of ['Create', 'Show', 'Close All']) {
+  for (let option of ['Create', 'Show']) {
     let a = document.createElement('a');
     a.href = '#';
     a.innerText = option;
     a.dataset.action = option.toLowerCase().replace(' ', '-');
     a.dataset.identity = identity.cookieStoreId;
+    a.dataset.currentTabs = identity.currentTabs;
     a.addEventListener('click', eventHandler);
     node.appendChild(a);
   }
@@ -52,19 +66,42 @@ if (browser.contextualIdentities === undefined) {
         div.innerText = 'No identities returned from the API.';
         return;
       }
-
-      // console.log(identities);
+      // default identity
+      identities.unshift({
+          "name": "Tabs",
+          "icon": "Blocks",
+          "iconUrl": "img/multiaccountcontainertabs-16.svg",
+          "color": "white",
+          "colorCode": "#ffffff",
+          "cookieStoreId": "firefox-default"
+      });
+      console.log(identities);
 
       for (let identity of identities) {
-        // console.log(identity);
-        let row = document.createElement('div');
-        let span = document.createElement('span');
-        span.className = 'identity';
-        span.innerText = identity.name;
-        span.style = `color: ${identity.color}`;
-        row.appendChild(span);
-        createOptions(row, identity);
-        div.appendChild(row);
+        // check if no tabs for an identity yet
+        browser.tabs.query({ 
+          cookieStoreId: identity.cookieStoreId
+        }).then((list) => {
+          identity.currentTabs = list.length > 0 ? true : false;
+          let row = document.createElement('div');
+          let img = document.createElement('span');
+          let span = document.createElement('span');
+          span.className = 'identity';
+          span.innerText = identity.name;
+          span.style = `color: ${identity.colorCode};`;
+          span.dataset.identity = identity.cookieStoreId;
+          span.dataset.tabs = identity.currentTabs;
+          // img.src = `${identity.iconUrl}`;
+          // img.id = identity.cookieStoreId;
+          img.className = 'test';
+          img.style = `mask-repeat: no-repeat; mask-image: url(${identity.iconUrl}); background-color: ${identity.colorCode};`
+          span.addEventListener('click', eventHandler);
+          span.prepend(img);
+          row.appendChild(span);
+          // createOptions(row, identity);
+          div.appendChild(row);
+          console.log(document.querySelector("#firefox-container-1"));
+        });
       }
     });
 }
@@ -99,3 +136,11 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 } else {
   popup.setAttribute("data-theme", "light");
 }
+
+// document.querySelector("#settings").addEventListener('click', () => {
+//   // browser.runtime.openOptionsPage();
+//   // browser.tabs.create({url: "about:preferences"});
+//   browser.tabs.create({
+//     url: "about:preferences",
+//   });
+// });
