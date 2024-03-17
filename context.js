@@ -54,7 +54,7 @@ if (browser.contextualIdentities === undefined) {
       identities.unshift({
           "name": "Tabs",
           "icon": "Blocks",
-          "iconUrl": "img/multiaccountcontainertabs-16.svg",
+          "iconUrl": "img/tabs-16.svg",
           "color": "white",
           "colorCode": "#ffffff",
           "cookieStoreId": "firefox-default"

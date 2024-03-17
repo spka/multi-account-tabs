@@ -26,5 +26,10 @@
   ],
   "icons": {
     "128": "img/tabs-16.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "spka@outlook.com"
+    }
   }
 }
