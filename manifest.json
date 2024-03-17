@@ -25,5 +25,8 @@
   ],
   "icons": {
     "128": "identity.svg"
+  },
+  "background": {
+    "page": "background.html"
   }
 }
