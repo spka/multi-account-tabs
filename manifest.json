@@ -3,20 +3,20 @@
     "browser_style": true,
     "default_title": "Multi-Account Container Tabs",
     "default_popup": "context.html",
-    "default_icon": "img/multiaccountcontainer-16.svg",
+    "default_icon": "img/tabs-16.svg",
     "default_area": "navbar",
     "theme_icons": [
       {
-        "light": "img/multiaccountcontainertabs-16.svg",
-        "dark": "img/multiaccountcontainertab-16.svg",
+        "light": "img/tabs-16.svg",
+        "dark": "img/tabs-16.svg",
         "size": 32
       }
     ]
   },
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/contextual-identities",
+  "homepage_url": "https://github.com/spka/multi-account-tabs",
   "manifest_version": 2,
-  "name": "Contextual Identities",
-  "version": "1.0",
+  "name": "Multi-Account Container Tabs",
+  "version": "0.1",
   "permissions": [
       "contextualIdentities",
       "cookies",
@@ -24,6 +24,6 @@
       "storage"
   ],
   "icons": {
-    "128": "identity.svg"
+    "128": "img/tabs-16.svg"
   }
 }
