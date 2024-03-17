@@ -2,4 +2,4 @@
 
 ## What it does
 
-Creates a menu that only shows the tabs of the selected container.
+Creates a menu to only shows the tabs of the selected container.
