@@ -1,23 +1,12 @@
 function eventHandler(event) {
-
-  // console.log(event.target.dataset.tabs);
-
   if(event.target.dataset.tabs == 'false') {
     browser.tabs.create({
       // url: 'about:blank',
       cookieStoreId: event.target.dataset.identity,
-      // active: true
+      active: true
     });
     event.target.dataset.tabs = 'true';
   }
-
-  // if (event.target.dataset.action == 'remove') {
-  //   browser.tabs.query({
-  //     cookieStoreId: event.target.dataset.identity
-  //   }).then((tabs) => {
-  //     browser.tabs.remove(tabs.map((i) => i.id));
-  //   });
-  // }
 
   onlyShowIdentity(event.target.dataset.identity);
   event.preventDefault();
@@ -30,12 +19,6 @@ function onlyShowIdentity(identity) {
       const idArray = identities.map((i) => i.id);
       browser.tabs.update(idArray[0], { active: true });
       browser.tabs.query({}).then((tabs) => {
-        // let newArray = [];
-        // for (let tab of tabs.map((i) => i.id)) {
-        //   if(!idArray.includes(tab)) {
-        //     newArray.push(tab);
-        //   }
-        // }
         browser.tabs.hide(tabs.map((i) => i.id));
         browser.tabs.show(idArray);
         window.close();
@@ -76,7 +59,6 @@ if (browser.contextualIdentities === undefined) {
           "colorCode": "#ffffff",
           "cookieStoreId": "firefox-default"
       });
-      console.log(identities);
 
       for (let identity of identities) {
         // check if no tabs for an identity yet
@@ -92,44 +74,16 @@ if (browser.contextualIdentities === undefined) {
           span.style = `color: ${identity.colorCode};`;
           span.dataset.identity = identity.cookieStoreId;
           span.dataset.tabs = identity.currentTabs;
-          // img.src = `${identity.iconUrl}`;
-          // img.id = identity.cookieStoreId;
           img.className = 'test';
           img.style = `mask-repeat: no-repeat; mask-image: url(${identity.iconUrl}); background-color: ${identity.colorCode};`
           span.addEventListener('click', eventHandler);
           span.prepend(img);
           row.appendChild(span);
-          // createOptions(row, identity);
           div.appendChild(row);
-          console.log(document.querySelector("#firefox-container-1"));
         });
       }
     });
 }
-
-// set theme
-// function getTheme(currentTheme, window) {
-//   if (typeof currentTheme !== "undefined" && currentTheme !== "auto") {
-//     return currentTheme;
-//   }
-//   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-//     return "dark";
-//   }
-//   return "light";
-// }
-
-// browser.storage.local.get("currentTheme")
-//   .then((currentTheme) => {
-//     const popup = document.getElementsByTagName("html")[0];
-//     // const theme = getTheme(currentTheme, window);
-//     // console.log(JSON.parse(JSON.stringify(currentTheme)));
-//     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-//       // return "dark";
-//       popup.setAttribute("data-theme", "dark");
-//     }
-//     // return "light";
-//     popup.setAttribute("data-theme", "light");
-//   });
 
 const popup = document.getElementsByTagName("html")[0];
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -137,11 +91,3 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 } else {
   popup.setAttribute("data-theme", "light");
 }
-
-// document.querySelector("#settings").addEventListener('click', () => {
-//   // browser.runtime.openOptionsPage();
-//   // browser.tabs.create({url: "about:preferences"});
-//   browser.tabs.create({
-//     url: "about:preferences",
-//   });
-// });
