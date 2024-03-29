@@ -50,13 +50,15 @@ if (browser.contextualIdentities === undefined) {
         div.innerText = 'No identities returned from the API.';
         return;
       }
+
+      const theme = document.getElementsByTagName("html")[0].dataset.theme;
       // default identity
       identities.unshift({
           "name": "Tabs",
           "icon": "Blocks",
           "iconUrl": "img/tabs-16.svg",
-          "color": "white",
-          "colorCode": "#ffffff",
+          "color": (theme == 'light') ? "black" : "white",
+          "colorCode": (theme == 'light') ? '#000000' : "#ffffff",
           "cookieStoreId": "firefox-default"
       });
 
