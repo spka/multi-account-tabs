@@ -17,7 +17,7 @@
   "manifest_version": 2,
   "name": "Multi-Account Container Tabs",
   "description": "Creates a menu to only shows the tabs of the selected container.",
-  "version": "0.1",
+  "version": "0.1.1",
   "permissions": [
       "contextualIdentities",
       "cookies",
