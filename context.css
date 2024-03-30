@@ -213,6 +213,7 @@ span.identity .test {
   top: 7px;
   left: 10px;
   mask-size: contain;
+  pointer-events: none;
 }
 
 span.identity:hover {
